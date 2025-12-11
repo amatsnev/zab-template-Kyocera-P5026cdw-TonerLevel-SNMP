@@ -1,0 +1,127 @@
+zabbix_export:
+  version: '6.0'
+  date: '2025-12-11T07:50:56Z'
+  groups:
+    - uuid: a571b242e5d44ac8a3867f105438984a
+      name: Templates/Printers
+  templates:
+    - uuid: 8d2c2e2588a340d896e852e4873a7e9d
+      template: 'Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP'
+      name: 'Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP'
+      description: 'Шаблон для мониторинга уровней тонеров принтера Kyocera ECOSYS P5026cdw через SNMP'
+      groups:
+        - name: Templates/Printers
+      items:
+        - uuid: 857870996097435c82de19ace3a75bca
+          name: 'Black Toner Level'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.43.11.1.1.9.1.4
+          key: printer.toner.black.level
+          delay: 30m
+          history: 30d
+          units: '%'
+          description: 'Уровень черного тонера в процентах (OID: 1.3.6.1.2.1.43.11.1.1.9.1.4)'
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.0166666666666667'
+          triggers:
+            - uuid: d23a13ffc2774b1abc4643a5caee4649
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.black.level,#1)<"{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Критический уровень черного тонера'
+              priority: HIGH
+              description: 'Критический уровень черного тонера (ниже {$TONER_LEVEL_ERROR}%)'
+            - uuid: a23a13ffc2774b1abc4643a5caee4649
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.black.level,#1)<"{$TONER_LEVEL_WARNING}" and last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.black.level,#1)>="{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Низкий уровень черного тонера'
+              priority: WARNING
+              description: 'Низкий уровень черного тонера (ниже {$TONER_LEVEL_WARNING}%, но выше {$TONER_LEVEL_ERROR}%)'
+        - uuid: df49431b59e34b7d8517c7b913e34c7b
+          name: 'Cyan Toner Level'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.43.11.1.1.9.1.1
+          key: printer.toner.cyan.level
+          delay: 30m
+          history: 30d
+          units: '%'
+          description: 'Уровень голубого тонера в процентах (OID: 1.3.6.1.2.1.43.11.1.1.9.1.1)'
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.0166666666666667'
+          triggers:
+            - uuid: f41e8c84e82442ed8f3e325e77a83c1d
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.cyan.level,#1)<"{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Критический уровень голубого тонера'
+              priority: HIGH
+              description: 'Критический уровень голубого тонера (ниже {$TONER_LEVEL_ERROR}%)'
+            - uuid: b41e8c84e82442ed8f3e325e77a83c1d
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.cyan.level,#1)<"{$TONER_LEVEL_WARNING}" and last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.cyan.level,#1)>="{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME}Низкий уровень голубого тонера'
+              priority: WARNING
+              description: 'Низкий уровень голубого тонера (ниже {$TONER_LEVEL_WARNING}%, но выше {$TONER_LEVEL_ERROR}%)'
+        - uuid: c73e474564a9493893056f0176e076e6
+          name: 'Magenta Toner Level'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.43.11.1.1.9.1.2
+          key: printer.toner.magenta.level
+          delay: 30m
+          history: 30d
+          units: '%'
+          description: 'Уровень пурпурного тонера в процентах (OID: 1.3.6.1.2.1.43.11.1.1.9.1.2)'
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.0166666666666667'
+          triggers:
+            - uuid: c73e474564a9493893056f0176e076e7
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.magenta.level,#1)<"{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Критический уровень пурпурного тонера'
+              priority: HIGH
+              description: 'Критический уровень пурпурного тонера (ниже {$TONER_LEVEL_ERROR}%)'
+            - uuid: d73e474564a9493893056f0176e076e7
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.magenta.level,#1)<"{$TONER_LEVEL_WARNING}" and last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.magenta.level,#1)>="{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME}Низкий уровень пурпурного тонера'
+              priority: WARNING
+              description: 'Низкий уровень пурпурного тонера (ниже {$TONER_LEVEL_WARNING}%, но выше {$TONER_LEVEL_ERROR}%)'
+        - uuid: b28c18448f544188930e9518e4449433
+          name: 'Yellow Toner Level'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.43.11.1.1.9.1.3
+          key: printer.toner.yellow.level
+          delay: 30m
+          history: 30d
+          units: '%'
+          description: 'Уровень желтого тонера в процентах (OID: 1.3.6.1.2.1.43.11.1.1.9.1.3)'
+          preprocessing:
+            - type: MULTIPLIER
+              parameters:
+                - '0.0125'
+          triggers:
+            - uuid: b28c18448f544188930e9518e4449434
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.yellow.level,#1)<"{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Критический уровень желтого тонера'
+              priority: HIGH
+              description: 'Критический уровень желтого тонера (ниже {$TONER_LEVEL_ERROR}%)'
+            - uuid: c28c18448f544188930e9518e4449434
+              expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.yellow.level,#1)<"{$TONER_LEVEL_WARNING}" and last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.yellow.level,#1)>="{$TONER_LEVEL_ERROR}"'
+              name: '{HOST.NAME} Низкий уровень желтого тонера'
+              priority: WARNING
+              description: 'Низкий уровень желтого тонера (ниже {$TONER_LEVEL_WARNING}%, но выше {$TONER_LEVEL_ERROR}%)'
+        - uuid: e57d2516e4694b9ea09068b934651793
+          name: 'Waste Toner Box Level'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.2.1.43.11.1.1.9.1.5
+          key: printer.waste.level
+          delay: 1h
+          history: 30d
+          trends: '0'
+          value_type: CHAR
+          description: 'Уровень отработанного тонера (OID: 1.3.6.1.2.1.43.11.1.1.9.1.5)'
+      macros:
+        - macro: '{$TONER_LEVEL_ERROR}'
+          value: '5'
+          description: 'Общий порог ошибки для тонеров в процентах (5%)'
+        - macro: '{$TONER_LEVEL_WARNING}'
+          value: '15'
+          description: 'Общий порог предупреждения для тонеров в процентах (15%)'

@@ -1,6 +1,6 @@
 zabbix_export:
   version: '6.0'
-  date: '2025-12-11T07:50:56Z'
+  date: '2025-12-11T08:50:10Z'
   groups:
     - uuid: a571b242e5d44ac8a3867f105438984a
       name: Templates/Printers
@@ -24,7 +24,7 @@ zabbix_export:
           preprocessing:
             - type: MULTIPLIER
               parameters:
-                - '0.0166666666666667'
+                - '0.0125'
           triggers:
             - uuid: d23a13ffc2774b1abc4643a5caee4649
               expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.black.level,#1)<"{$TONER_LEVEL_ERROR}"'
@@ -96,7 +96,7 @@ zabbix_export:
           preprocessing:
             - type: MULTIPLIER
               parameters:
-                - '0.0125'
+                - '0.0166666666666667'
           triggers:
             - uuid: b28c18448f544188930e9518e4449434
               expression: 'last(/Template Printer Kyocera ECOSYS P5026cdw Toner Level SNMP/printer.toner.yellow.level,#1)<"{$TONER_LEVEL_ERROR}"'
